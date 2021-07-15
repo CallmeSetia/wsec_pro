@@ -18,6 +18,6 @@
 
 # Version Change Log
 
-- Verison 1.1.0 -> Auto Connect Wifi While Disconnected
+- Verison 1.1.0 => Auto Connect Wifi While Disconnected
 - Version 1.0.1 => Multitask Enable using Protothread
 - Version 1.0.0 => String Parser 
