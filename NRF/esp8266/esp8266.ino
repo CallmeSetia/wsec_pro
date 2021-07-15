@@ -15,13 +15,8 @@ int statusWifi = 0;
 #include <WiFiClient.h>
 
 String PROTOKOL = "http";
-String HOST = "192.168.137.1";
-String TARGET = "tugasAkhir";
-
-String REQUEST_FLOW = "";
-String REQUEST_INA = "";
-String REQUEST_PID = "";
-String REQUEST_BATT = "";
+String HOST = "projek.bengkelti.com";
+String TARGET = "pju";
 
 String URL = PROTOKOL + "://" + HOST + "/" + TARGET + "";
 String read1, read2, read3, read4;
@@ -66,8 +61,9 @@ void loop() {
       float tegangan = read3.toFloat();
       float arus = read4.toFloat();
       float daya = tegangan * arus;
-
-      String requestData = URL +  "dariESP.php?rcwlValue=" + String(rcwl)
+      
+      //http://projek.bengkelti.com/pju/dariESP.php?rcwlValue=2&teganganValue=3&dayaValue=2&arusValue=2
+      String requestData = URL +  "/dariESP.php?rcwlValue=" + String(rcwl)
                            + "&teganganValue=" + String(tegangan) +
                            +  "&dayaValue=" + String(arus) +
                            +  "&arusValue=" + String(daya) + "";
