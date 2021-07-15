@@ -1,4 +1,4 @@
-# PANDUAN 
+# Panduan Penggunaan
 
 1. CLONE REPOSITORY
 2. MAIN FILE ADA DI => esp8266.ino 
@@ -16,6 +16,7 @@
         String URL = PROTOKOL + "://" + HOST + "/" + TARGET + "";
 
 
-# VERSION CHANGELOG
+# Version Change Log
 
 - Version 1.0.1 => Multitask Enable using Protothread
+- Version 1.0.0 => String Parser 
