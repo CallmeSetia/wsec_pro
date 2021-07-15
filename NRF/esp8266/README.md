@@ -16,3 +16,6 @@
         String URL = PROTOKOL + "://" + HOST + "/" + TARGET + "";
 
 
+# VERSION CHANGELOG
+
+- Version 1.0.1 => Multitask Enable using Protothread
