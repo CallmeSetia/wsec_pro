@@ -19,7 +19,7 @@ String HOST = "projek.bengkelti.com";
 String TARGET = "pju";
 
 String URL = PROTOKOL + "://" + HOST + "/" + TARGET + "";
-String read1, read2, read3, read4;
+String read1, read2, read3, read4, read5, read6;
 
 // Sofware Serial
 #include <SoftwareSerial.h>
@@ -56,17 +56,25 @@ void loop() {
       read2 = parseString(Read, "#", 1);
       read3 = parseString(Read, "#", 2);
       read4 = parseString(Read, "#", 3);
-
-      int rcwl = read2.toInt();
-      float tegangan = read3.toFloat();
-      float arus = read4.toFloat();
-      float daya = tegangan * arus;
+      read5 = parseString(Read, "#", 4);
+      read6 = parseString(Read, "#", 5);
       
-      //http://projek.bengkelti.com/pju/dariESP.php?rcwlValue=2&teganganValue=3&dayaValue=2&arusValue=2
+      int rcwl = read2.toInt();
+      
+      float teganganPV = read3.toFloat();
+      float teganganBeban = read4.toFloat();
+      
+      float arusPV = read5.toFloat();
+      float arusBeban = read6.toFloat();
+      
+      // http://projek.bengkelti.com/pju/dariESP.php?rcwlValue=24&teganganValue=2&dayaValue=4&arusValue=3&arusBeban=4&teganganBeban=5
+      
       String requestData = URL +  "/dariESP.php?rcwlValue=" + String(rcwl)
-                           + "&teganganValue=" + String(tegangan) +
-                           +  "&dayaValue=" + String(arus) +
-                           +  "&arusValue=" + String(daya) + "";
+                           + "&teganganValue=" + String(teganganPV) +
+                           +  "&dayaValue=" + String(arusPV * teganganPV ) +
+                           +  "&arusValue=" + String(arusPV) +
+                           +  "&arusBeban=" + String(arusBeban) + 
+                           +  "&teganganBeban=" + String(teganganBeban) + "";
 
       // ---
       // Debug
