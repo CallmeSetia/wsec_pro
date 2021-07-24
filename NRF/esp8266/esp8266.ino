@@ -60,8 +60,56 @@ void loop() {
       read2 = parseString(Read, "#", 1);
       read3 = parseString(Read, "#", 2);
       read4 = parseString(Read, "#", 3);
+      read5 = parseString(Read, "#", 4);
+      read6 = parseString(Read, "#", 5);
 
-      Serial.print("READ SERIAL : " + String(read2.toInt())) ;
+      Serial.print("READ SERIAL : " + String() ) ;
+      int rcwl = read2.toInt();
+
+      float teganganPV = read3.toFloat();
+      float teganganBeban = read4.toFloat();
+
+      float arusPV = read5.toFloat();
+      float arusBeban = read6.toFloat();
+
+      // http://projek.bengkelti.com/pju/dariESP.php?rcwlValue=24&teganganValue=2&dayaValue=4&arusValue=3&arusBeban=4&teganganBeban=5
+
+      String requestData = URL +  "/dariESP.php?rcwlValue=" + String(rcwl)
+                           + "&teganganValue=" + String(teganganPV) +
+                           +  "&dayaValue=" + String(arusPV * teganganPV ) +
+                           +  "&arusValue=" + String(arusPV) +
+                           +  "&arusBeban=" + String(arusBeban) +
+                           +  "&teganganBeban=" + String(teganganBeban) + "";
+
+      // ---
+      // Debug
+      // ---
+
+      // Serial.println("RCWL : " + String(rcwl) + " - Tegangan : " + String(tegangan) + " - Arus : " + String(arus) + + " - Daya : " + String(daya) + " - END " );
+      // delay(100);
+
+      // ----
+      // kirim ke database
+      // ----
+
+      if (WiFi.status() == WL_CONNECTED) {
+
+        Serial.println("SEND");
+        WiFiClient client;
+        HTTPClient http;
+
+        http.begin(client, requestData);
+        int httpCode = http.GET();
+
+        if (httpCode > 0) {
+          String payload = http.getString();
+          Serial.println(payload);
+        }
+        http.end();
+      }
+      else {
+        konekWifi(SSID, PASSWORD);
+      }
     }
 
   }
